@@ -12,10 +12,9 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [icon, setIcon] = useState(FaRegEyeSlash);
   const handlePasswordVisiblity = (e) => {
     e.preventDefault();
-    setIcon(FaRegEye);
+
     setShowPassword(!showPassword);
   };
   async function handlesubmit(e) {

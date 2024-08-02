@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import Login from "./Login";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -12,6 +14,13 @@ function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handlePasswordVisiblity = (e) => {
+    e.preventDefault();
+
+    setShowPassword(!showPassword);
+  };
+
   async function handlesubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
@@ -46,16 +55,30 @@ function Signup() {
             </Form.Group>
             <Form.Group className=" mb-3">
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter Password"
-                ref={passwordRef}
-              />
+              <div className=" position-relative">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter Password"
+                  ref={passwordRef}
+                />
+                <span
+                  className="  d-flex  position-absolute top-50 end-0 translate-middle-y   mx-2"
+                  onClick={handlePasswordVisiblity}
+                >
+                  {" "}
+                  {showPassword ? (
+                    <FaRegEye size={18} />
+                  ) : (
+                    <FaRegEyeSlash size={25} />
+                  )}
+                </span>
+              </div>
             </Form.Group>
             <Form.Group className=" mb-3">
               <Form.Label>confirmPassword</Form.Label>
+
               <Form.Control
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter Confirm Password"
                 ref={confirmPasswordRef}
               />
