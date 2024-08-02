@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import Signup from "./SignUp";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +11,13 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [icon, setIcon] = useState(FaRegEyeSlash);
+  const handlePasswordVisiblity = (e) => {
+    e.preventDefault();
+    setIcon(FaRegEye);
+    setShowPassword(!showPassword);
+  };
   async function handlesubmit(e) {
     e.preventDefault();
 
@@ -44,8 +52,7 @@ function Login() {
           // setError(error.message);
           break;
       }
-      console.log(error);
-      console.log(error.message);
+
       setError(error.message);
     } finally {
       setLoading(false);
@@ -67,13 +74,26 @@ function Login() {
                 ref={emailRef}
               />
             </Form.Group>
-            <Form.Group className=" mb-3">
+            <Form.Group className=" mb-3   ">
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter Password"
-                ref={passwordRef}
-              />
+              <div className=" position-relative">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter Password"
+                  ref={passwordRef}
+                />
+                <span
+                  className="  d-flex  position-absolute top-50 end-0 translate-middle-y   mx-2"
+                  onClick={handlePasswordVisiblity}
+                >
+                  {" "}
+                  {showPassword ? (
+                    <FaRegEye size={18} />
+                  ) : (
+                    <FaRegEyeSlash size={25} />
+                  )}
+                </span>
+              </div>
             </Form.Group>
 
             <div className="d-flex justify-content-center">

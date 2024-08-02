@@ -42,9 +42,12 @@ export function AuthProvider({ children }) {
     });
     return unsubscribe;
   }, []);
+  const [sucessMessage, setSucessMessage] = useState("");
 
   const value = {
     currentUser,
+    sucessMessage,
+    setSucessMessage,
     signup,
     login,
     logout,

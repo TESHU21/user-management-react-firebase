@@ -6,8 +6,9 @@ import UpdateProfile from "./UpdateProfile";
 
 const Dashboard = () => {
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, sucessMessage, setSucessMessage } = useAuth();
   const navigate = useNavigate();
+  // console.log(sucessMessage);
 
   async function handleLogout() {
     setError("");
@@ -18,6 +19,7 @@ const Dashboard = () => {
     <>
       <Card>
         <Card.Body>
+          {sucessMessage && <Alert variant=" sucess">{sucessMessage}</Alert>}
           <h2 className="  d-flex text-center p-3 justify-content-center">
             Profile
           </h2>
@@ -25,8 +27,6 @@ const Dashboard = () => {
           <Link to="/updateprofile" className=" btn btn-primary w-100 mt-3">
             <div className=" p-1">Update Profile</div>
           </Link>
-
-          {error && <Alert variant="danger">{error}</Alert>}
         </Card.Body>
       </Card>
 

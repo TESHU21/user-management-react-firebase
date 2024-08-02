@@ -5,12 +5,17 @@ import Login from "./Login";
 import { Link, useNavigate } from "react-router-dom";
 
 function UpdateProfile() {
-  const { currentUser, UpdateEmail, UpdatePassword } = useAuth();
+  const {
+    currentUser,
+    UpdateEmail,
+    UpdatePassword,
+    sucessMessage,
+    setSucessMessage,
+  } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [error, setError] = useState("");
-  const [sucessMessage, setSucessMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -54,8 +59,6 @@ function UpdateProfile() {
         <Card.Body>
           {error && <Alert variant="danger">{error}</Alert>}
 
-          {sucessMessage && <div>{sucessMessage}hello</div>}
-          <h1>me</h1>
           <h2 className=" text-center mb-4">Update Profile</h2>
           <Form onSubmit={handlesubmit}>
             <Form.Group className=" mb-3">
